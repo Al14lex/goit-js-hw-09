@@ -1,3 +1,6 @@
+import SimpleLightbox from "simplelightbox";
+import "simplelightbox/dist/simple-lightbox.min.css";
+
 /*------------масив фото---------*/
 const images = [
 {
@@ -68,7 +71,6 @@ const images = [
 /*----знаходимо наш ліст, створюємо галерею фото, додаємо в html--------*/
 const container = document.querySelector('.gallery');
 const galleryMarkup = createGalleryMarkup(images);
-container.innerHTML = galleryMarkup;
 
 /*--------розмітка в яку вставляємо дані з масиву----------*/
 function createGalleryMarkup(images) {
@@ -79,7 +81,6 @@ function createGalleryMarkup(images) {
             <img
               class="gallery-image"
               src="${preview}"
-              data-source="${original}"
               alt="${description}"
             />
           </a>
@@ -88,22 +89,7 @@ function createGalleryMarkup(images) {
   }).join('');
 }
 
-/*--------слухач-------*/
-document.addEventListener('DOMContentLoaded', () => {
-  const gallery1 = document.querySelector('.gallery');
+container.insertAdjacentHTML('beforeend', galleryMarkup);
 
-gallery1.addEventListener('click', (event) => {
-  event.preventDefault();
-
-  if (event.target.nodeName === 'IMG') {
-    const bigImageURL = event.target.dataset.source;
-    console.log(bigImageURL);
-    
-    const imageAlt = event.target.alt;
-    const instance = basicLightbox.create(`
-      <img src="${bigImageURL}" alt="${imageAlt}" width="800" height="600">
-    `);
-    instance.show();
-  }
-});
-});
+var lightbox = new SimpleLightbox('.gallery a', { captionsData: 'alt',
+  captionDelay: 250, });

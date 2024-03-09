@@ -1,60 +1,40 @@
+const feedbackForm = document.querySelector('.feedback-form');
+const FEEDBACK_FORM_STATE = 'feedbackFormState';
 
-
-
-
-
-
-
-
-
-/*const form = document.querySelector('.feedback-form');
-const LOCAL_STORAGE_KEY = 'feedback-form-state';
-
-// Функція для зберігання форми у локальному сховищі
-function saveFormState() {
-  const formData = new FormData(form);
-  const formDataObject = {};
-  formData.forEach((value, key) => {
-    formDataObject[key] = value;
-  });
-  localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(formDataObject));
+/*зберігаємо дані*/
+function storeFormData() {
+  const feedbackData = new FormData(feedbackForm);
+  const feedbackDataObj = {};
+  feedbackData.forEach((value, key) => {feedbackDataObj[key] = value;});
+  localStorage.setItem(FEEDBACK_FORM_STATE, JSON.stringify(feedbackDataObj));
 }
 
-// Функція для відновлення стану форми
-function populateFormState() {
-  const savedData = localStorage.getItem(LOCAL_STORAGE_KEY);
-  if (savedData) {
-    const formDataObject = JSON.parse(savedData);
-    Object.entries(formDataObject).forEach(([key, value]) => {
-      form.elements[key].value = value;
-    });
+/*відновлюємо данні*/
+function restoreFormData() {const retrievedData = localStorage.getItem(FEEDBACK_FORM_STATE);
+  if (retrievedData) {const feedbackDataObj = JSON.parse(retrievedData);
+    Object.entries(feedbackDataObj).forEach(([key, value]) => {feedbackForm.elements[key].value = value;});
   }
 }
 
-// Відновлюємо стан форми при завантаженні сторінки
-populateFormState();
+restoreFormData();
 
-// Відстежуємо введення даних у форму
-form.addEventListener('input', () => {
-  saveFormState();
+/*слідкуємо за змінами*/
+feedbackForm.addEventListener('input', () => {storeFormData();
 });
 
-// Обробка події сабміту форми
-form.addEventListener('submit', event => {
-  event.preventDefault();
-  const formData = new FormData(form);
-  const formDataObject = {};
-  formData.forEach((value, key) => {
-    formDataObject[key] = value.trim(); // Обрізаємо пробіли по краях
+/*слухач надсилання форми*/
+feedbackForm.addEventListener('submit', event => {event.preventDefault();
+  const feedbackData = new FormData(feedbackForm);
+  const feedbackDataObj = {};
+  feedbackData.forEach((value, key) => {feedbackDataObj[key] = value.trim();
   });
   
-  // Перевірка, щоб обидва поля були заповнені
-  if (formDataObject.email && formDataObject.message) {
-    console.log(formDataObject);
-    localStorage.removeItem(LOCAL_STORAGE_KEY);
-    form.reset();
+/*перевіряємо чи все заповнено*/
+  if (feedbackDataObj.email && feedbackDataObj.message) {
+    console.log(feedbackDataObj);
+    localStorage.removeItem(FEEDBACK_FORM_STATE);
+    feedbackForm.reset();
   } else {
-    alert('Please fill in all fields.');
+    alert('Будь ласка, заповніть усі поля.');
   }
 });
-*/

@@ -1,12 +1,14 @@
-body{
-    padding: 50px 50px;
+body {
+  padding: 50px 50px;
 }
+
 .feedback-form{
   display: flex;
   flex-direction: column;
   
 }
 .feedback-form label{
+  font-family:Arial, sans-serif;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -18,19 +20,26 @@ body{
 .feedback-form label>input,
 .feedback-form label>textarea
 {
+  font-size: 16px;
+  font-family: Arial, sans-serif;
   border-radius: 4px;
   border: 1px solid #808080;
   width: 360px;
-  height: 40px;
+  height: 35px;
   padding: 8px 16px;
   background-color: transparent;
 
 }
 .feedback-form label>textarea{
+  font-family: Arial, sans-serif;
+  padding-top: 15px;
+  font-size: 16px;
     height: 80px;
+    resize: none;
 }
 
 .feedback-form button{
+  font-family: Arial, sans-serif;
   margin-top: 8px;
   padding: 8px 16px;
   border-radius: 8px;
@@ -40,7 +49,7 @@ body{
   height: 40px;
   color: #FFF;
   font-weight: 500;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.04em;
   transition: background-color 250ms linear, color 250ms linear;
 }
 .feedback-form button:hover,
